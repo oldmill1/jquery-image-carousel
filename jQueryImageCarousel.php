@@ -43,7 +43,7 @@ function carousel_func( $atts ){
 		// we've got some images ! 
 		foreach ( $images as $image ) { 
 			$attachmenturl = wp_get_attachment_url($image->ID); 
-			$attachmentthumbsrc = wp_get_attachment_image_src( $image->ID, 'full' ); 
+			$attachmentthumbsrc = wp_get_attachment_image_src( $image->ID, 'medium' ); 
 			$img_title = $image->post_title;
 			$imagelocs[] = array( 
 				"full" => $attachmenturl, 
