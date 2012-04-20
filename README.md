@@ -7,8 +7,8 @@ A WordPress plugin implemented as a shortcode for creating a slideshow right fro
 Using this plugin is as easy as 
 
 <ul>
-  <li>Upload a bunch of images.</li>
-  <li>Put the shortcode [carousel] somewhere in the body of the post.</li>
-  <li>Publish or preview your posts.</li>
+  <li>Upload a bunch of images to a post.</li>
+  <li>Put the word <strong>[carousel]</strong> somewhere in the body of the post.</li>
+  <li>Publish or preview your post.</li>
 </ul>
 
