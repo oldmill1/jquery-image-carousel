@@ -22,11 +22,19 @@ wp_enqueue_style(
 	plugins_url( 'css/style.css', __FILE__ ) 
 ); 
 
-//[carouselle]
+//[carousel size="medium"]
 function carousel_func( $atts ){
+	extract( shortcode_atts( array(
+		'size' => 'medium',
+	), $atts ) );
+	
 	$postID = get_the_id();
 	$num = -1; 
-	$size = 'full'; //thumbnail, medium, large or full, or array(w, h)
+	//thumbnail, medium, large or full
+	$allowed_sizes = array("thumbnail", "medium", "large", "full"); 
+	if ( ! in_array( $size, $allowed_sizes ) ) { 
+		$size = "medium"; 
+	} 
 	
 	$images = get_children( 
 		array( 
@@ -43,7 +51,7 @@ function carousel_func( $atts ){
 		// we've got some images ! 
 		foreach ( $images as $image ) { 
 			$attachmenturl = wp_get_attachment_url($image->ID); 
-			$attachmentthumbsrc = wp_get_attachment_image_src( $image->ID, 'medium' ); 
+			$attachmentthumbsrc = wp_get_attachment_image_src( $image->ID, $size ); 
 			$img_title = $image->post_title;
 			$imagelocs[] = array( 
 				"full" => $attachmenturl, 
