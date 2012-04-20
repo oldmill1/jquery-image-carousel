@@ -9,6 +9,8 @@ Author URI: https://github.com/oldmill1
 License: GPL2
 */
 
+wp_enqueue_script("jquery"); // load jQuery for those who don't have it
+
 wp_enqueue_script(
 	'jic', 
 	plugins_url( 'js/jic.js', __FILE__ ), 
