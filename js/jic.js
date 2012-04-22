@@ -1,4 +1,4 @@
-	(function($) {	
+(function($) {	
 		// cache
 		var container = $("#jquery_image_carousel"); 
 		var slides = $("#jquery_image_carousel ul li");
@@ -56,10 +56,26 @@
 			// transition 
 			transition: function( next ) {  
 				var active = $("#jquery_image_carousel ul li.active");
+				var w = jQueryImageCarousel.getWidth(next.find("img"));
+				var h = jQueryImageCarousel.getHeight(next.find("img"));  
+				
+				// try to get effect
+				var effect = container.attr("class");
+				if ( effect != undefined ) { 
+					var selectedEffect = effect.substr(11); 
+				}
+				
 				active.removeClass(); 
 				next.addClass("active"); 
 				
-				next.show(); 
+				var options = {};
+				if ( selectedEffect === "scale" ) {
+					options = { percent: 100 };
+				} else if ( selectedEffect === "size" ) {
+					options = { to: { width: w, height: h } };
+				}
+				next.show(selectedEffect); 
+
 				active.hide(); 
 				
 				container.width( 	jQueryImageCarousel.getWidth(next.find("img")) ); 
@@ -79,7 +95,7 @@
 			},
 			
 			// pass a jQuery img obj. and get its height returned
-			getHeight: function (	image ) { 
+			getHeight: function ( image ) { 
 				return parseInt(image.attr("height")); 
 			},  
 			

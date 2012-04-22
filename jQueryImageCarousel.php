@@ -19,6 +19,14 @@ wp_enqueue_script(
 	TRUE 
 ); 
 
+wp_enqueue_script(
+	'jqueryui', 
+	plugins_url( 'js/jquery-ui.min.js', __FILE__ ), 
+	NULL, 
+	NULL, 
+	TRUE 
+); 
+
 wp_enqueue_style(
 	'jic-styles', 
 	plugins_url( 'css/style.css', __FILE__ ) 
@@ -28,16 +36,22 @@ wp_enqueue_style(
 function carousel_func( $atts ){
 	extract( shortcode_atts( array(
 		'size' => 'medium',
+		'effect' => 'none'
 	), $atts ) );
 	
 	$postID = get_the_id();
 	$num = -1; 
-	//thumbnail, medium, large or full
-	$allowed_sizes = array("thumbnail", "medium", "large", "full"); 
-	if ( ! in_array( $size, $allowed_sizes ) ) { 
+
+	$sizes = array("thumbnail", "medium", "large", "full"); 
+	if ( ! in_array( $size, $sizes ) ) { 
 		$size = "medium"; 
 	} 
 	
+	$effects = array("blind", "bounce", "clip", "drop", "explode", "fold", "highlight", "puff", "pulsate", "scale", "shake", "size", "slide"); 
+	if ( ! in_array( $effect, $effects ) ) { 
+		$effect = "none"; 
+	} 
+		
 	$images = get_children( 
 		array( 
 			'post_parent' => $postID, 
@@ -65,7 +79,11 @@ function carousel_func( $atts ){
 		} 	
 	} 
 	
-	$build = "<div id='jquery_image_carousel'>"; 
+	$build = "<div id='jquery_image_carousel' "; 
+	if ( $effect != "none" ) { 
+		$build .= " class='jic-effect-{$effect}'"; 
+	} 
+	$build .= ">"; 
 	$build .= "<ul>"; 
 		foreach ( $imagelocs as $imageloc ) { 
 			$build .= "<li><img src='{$imageloc['full']}' width='{$imageloc['width']}' height='{$imageloc['height']}' /><div class='caption'><h6>{$imageloc['title']}</h6></div></li>"; 
