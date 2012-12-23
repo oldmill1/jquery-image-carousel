@@ -114,7 +114,7 @@
 				next.css("left", imgWidth-20); 
 				prev.css("right", imgWidth-20); 
 				
-			}, 
+			}
 
 		}; // jQueryImageCarousel
 		
