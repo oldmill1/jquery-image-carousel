@@ -120,18 +120,18 @@
 		
 		jQueryImageCarousel.init(); 
 		
-		$(".jic_next").click( function() {
+		$(".jic_next").click( function(event) {
 			event.preventDefault(); 
 			jQueryImageCarousel.next(); 
 		}); 
 		
 		
-		$(".jic_previous").click( function() {
+		$(".jic_previous").click( function(event) {
 			event.preventDefault(); 
 			jQueryImageCarousel.prev(); 
 		}); 
 		
-		$("#jquery_image_carousel li").click( function() {
+		$("#jquery_image_carousel li").click( function(event) {
 			event.preventDefault(); 
 			jQueryImageCarousel.next(); 
 		}); 
